@@ -1,8 +1,0 @@
-/.idea
-*.iml
-/.classpath
-/.project
-/.settings
-/db/
-/target/
-/hs_err_pid*.log
