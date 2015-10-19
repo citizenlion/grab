@@ -9,11 +9,12 @@ module.exports = function (grunt) {
 	var buildDir = "target";
 
 	// Build targets
-	grunt.registerTask('default', ['build']);
-	grunt.registerTask('build', ['clean', 'copy']);
+	grunt.registerTask('default', ['clean', 'build']);
+	grunt.registerTask('build', ['copy', 'less']);
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-mkdir');
 
 	grunt.initConfig({
@@ -31,8 +32,23 @@ module.exports = function (grunt) {
 			all: {
 				expand: true,
 				cwd: 'src',
-				src: ['config.xml', 'hooks/**', 'www/**'],
+				src: ['config.xml', 'hooks/**', 'www/**', '!**/*.less'],
 				dest: buildDir,
+			},
+		},
+		less: {
+			options: {
+				paths: ['src'],
+				ieCompat: false,
+				strictMath: true,
+				strictUnits: true,
+			},
+			all: {
+				expand: true,
+				cwd: 'src',
+				src: ['www/**/*.less'],
+				dest: buildDir,
+				ext: '.css',
 			},
 		},
 	});
